@@ -65,13 +65,11 @@ fi
 # Compile / Install nghttp2
 cd /build/nghttp2
 
-if test ! -r "configure"; then
-  autoreconf -i
-  automake
-  autoconf
-fi
+autoreconf -i
+automake
+autoconf
 
-./configure --enable-app --with-neverbleed \
+./configure --enable-app\
             --disable-dependency-tracking\
             --disable-examples --disable-static\
 	    --prefix=/usr
