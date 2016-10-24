@@ -2,8 +2,8 @@ FROM debian:8.5
 
 MAINTAINER Alexandre Flament <alex@al-f.net>
 
-ENV NGHTTP2_VERSION 1.15.0
-ENV SPDYLAY_VERSION 1.3.2
+ENV NGHTTP2_VERSION 1.16.0
+ENV SPDYLAY_VERSION 1.4.0
 
 COPY *.sh /build/ 
 
