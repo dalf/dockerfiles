@@ -6,11 +6,14 @@ set +e
 NGHTTP2_RUNTIME_PACKAGES="libgcc libstdc++ jemalloc libev libxml2 jansson zlib ca-certificates"
 NGHTTP2_BUILD_PACKAGES="git curl xz clang clang-dev llvm gcc g++ autoconf automake make libtool file binutils jemalloc-dev libev-dev libxml2-dev jansson-dev zlib-dev cmake go"
 
-apk --no-cache -U add $NGHTTP2_RUNTIME_PACKAGES $NGHTTP2_BUILD_PACKAGES
+apk --no-cache -U add $NGHTTP2_RUNTIME_PACKAGES $NGHTTP2_BUILD_PACKAGES || exit 1
 
 # Clang
 export CC=/usr/bin/clang
 export CXX=/usr/bin/clang++
+export CFLAGS="-O3 -DNDEBUG"
+export CXXFLAGS=$CFLAGS
+export TOOLCHAIN_PREFIX=llvm-
 
 # BoringSSL
 cd /build
@@ -50,15 +53,14 @@ if test "$SPDYLAY_VERSION" != "DISABLED"; then
               --disable-examples --disable-src --disable-static\
               --prefix=/usr
 
+
   make -j $(getconf _NPROCESSORS_ONLN)
   make install
 fi
 
 # Download nghttp2
+cd /build
 if test -n "$NGHTTP2_VERSION"; then
-
-  cd /build
-  
   curl -fSL https://github.com/nghttp2/nghttp2/releases/download/v${NGHTTP2_VERSION}/nghttp2-${NGHTTP2_VERSION}.tar.xz -o nghttp2.tar.xz
   ls -l nghttp2.tar.xz
   tar xJf nghttp2.tar.xz
