@@ -2,12 +2,6 @@
 
 set +e
 
-# Install dependencies
-NGHTTP2_RUNTIME_PACKAGES="libgcc libstdc++ jemalloc libev libxml2 jansson zlib ca-certificates"
-NGHTTP2_BUILD_PACKAGES="git curl xz clang clang-dev llvm gcc g++ autoconf automake make libtool file binutils jemalloc-dev libev-dev libxml2-dev jansson-dev zlib-dev cmake go"
-
-apk --no-cache -U add $NGHTTP2_RUNTIME_PACKAGES $NGHTTP2_BUILD_PACKAGES || exit 1
-
 # Clang
 export CC=/usr/bin/clang
 export CXX=/usr/bin/clang++
@@ -83,9 +77,6 @@ autoconf
 
 make -j $(getconf _NPROCESSORS_ONLN)
 make install-strip
-
-# Remove build packages
-apk del $NGHTTP2_BUILD_PACKAGES
 
 # Remove /build
 rm -rf /build
