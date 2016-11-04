@@ -55,10 +55,8 @@ if test "$SPDYLAY_VERSION" != "DISABLED"; then
 fi
 
 # Download nghttp2
+cd /build
 if test -n "$NGHTTP2_VERSION"; then
-
-  cd /build
-  
   curl -fSL https://github.com/nghttp2/nghttp2/releases/download/v${NGHTTP2_VERSION}/nghttp2-${NGHTTP2_VERSION}.tar.xz -o nghttp2.tar.xz
   if [ 0 -ne $? ]; then
       exit 1
