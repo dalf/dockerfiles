@@ -1,8 +1,8 @@
-FROM alpine:3.4
+FROM alpine:3.5
 
 MAINTAINER Alexandre Flament <alex@al-f.net>
 
-# ENV NGHTTP2_VERSION 1.16.0
+ENV NGHTTP2_VERSION 1.21.0
 ENV SPDYLAY_VERSION 1.4.0
 
 ENV NGHTTP2_RUNTIME_PACKAGES "libgcc libstdc++ jemalloc libev libxml2 jansson zlib ca-certificates python"
