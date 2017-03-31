@@ -2,12 +2,6 @@
 
 set -e
 
-# Install dependencies
-NGHTTP2_RUNTIME_PACKAGES="libgcc libstdc++ jemalloc libev libxml2 jansson zlib python ca-certificates c-ares"
-NGHTTP2_BUILD_PACKAGES="git curl xz gnupg gcc g++ autoconf automake make libtool file binutils jemalloc-dev libev-dev libxml2-dev jansson-dev zlib-dev linux-headers c-ares-dev"
-
-apk --no-cache -U add $NGHTTP2_RUNTIME_PACKAGES $NGHTTP2_BUILD_PACKAGES
-
 # LibreSSL
 cd /build
 
@@ -84,16 +78,13 @@ autoreconf -i
 automake
 autoconf
 
-./configure --enable-app\
+./configure --enable-app --with-spdylay\
             --disable-dependency-tracking\
             --disable-examples --disable-static\
 	    --prefix=/usr
 
 make -j $(getconf _NPROCESSORS_ONLN)
 make install-strip
-
-# Remove build packages
-apk del $NGHTTP2_BUILD_PACKAGES
 
 # Remove /build
 rm -rf /build
