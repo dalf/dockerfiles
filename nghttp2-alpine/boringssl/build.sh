@@ -78,7 +78,7 @@ autoreconf -i
 automake
 autoconf
 
-./configure --enable-app\
+./configure --enable-app --with-spdylay\
             --disable-dependency-tracking\
             --disable-examples --disable-static\
 	    --prefix=/usr
