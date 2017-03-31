@@ -1,15 +1,10 @@
 #!/bin/sh
 
-# Install dependencies
-NGHTTP2_RUNTIME_PACKAGES="libgcc libstdc++ jemalloc libev libxml2 jansson zlib ca-certificates"
-NGHTTP2_BUILD_PACKAGES="git curl xz gcc g++ autoconf automake make libtool file binutils jemalloc-dev libev-dev libxml2-dev jansson-dev zlib-dev cmake go"
-
-apk --no-cache -U add $NGHTTP2_RUNTIME_PACKAGES $NGHTTP2_BUILD_PACKAGES
-
 # BoringSSL
 cd /build
-git clone https://boringssl.googlesource.com/boringssl
+git clone --depth 1 --single-branch https://boringssl.googlesource.com/boringssl
 cd boringssl
+git log --format="%H" -n 1 > /boringssl-commit-id.txt
 
 mkdir build
 cd build
@@ -85,9 +80,6 @@ autoconf
 
 make -j $(getconf _NPROCESSORS_ONLN)
 make install-strip
-
-# Remove build packages
-apk del $NGHTTP2_BUILD_PACKAGES
 
 # Remove /build
 rm -rf /build
