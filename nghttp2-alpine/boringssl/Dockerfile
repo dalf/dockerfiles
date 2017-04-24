@@ -2,7 +2,7 @@ FROM alpine:3.5
 
 MAINTAINER Alexandre Flament <alex@al-f.net>
 
-ENV NGHTTP2_VERSION 1.21.1
+ENV NGHTTP2_VERSION 1.22.0
 ENV SPDYLAY_VERSION 1.4.0
 
 ENV NGHTTP2_RUNTIME_PACKAGES "libgcc libstdc++ libev libxml2 jansson zlib ca-certificates c-ares"
