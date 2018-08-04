@@ -1,9 +1,8 @@
-FROM debian:stretch-slim
+FROM debian:stable-slim
 
 MAINTAINER Alexandre Flament <alex@al-f.net>
 
-ENV NGHTTP2_VERSION 1.28.0
-ENV SPDYLAY_VERSION 1.4.0
+ENV NGHTTP2_VERSION 1.32.0
 
 COPY *.sh /build/ 
 

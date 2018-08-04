@@ -7,26 +7,6 @@ dpkg -l | grep "^ii"| awk ' {print $2} ' > /build/installed_before.txt
 apt-get update -y
 apt-get $minimal_apt_get_args install $NGHTTP2_DOWNLOAD_PACKAGES
 
-# download spdylay
-cd /build
-
-if test "$SPDYLAY_VERSION" != "DISABLED"; then 
-  if test -n "$SPDYLAY_VERSION"; then
-    curl -fSL https://github.com/tatsuhiro-t/spdylay/releases/download/v${SPDYLAY_VERSION}/spdylay-${SPDYLAY_VERSION}.tar.xz -o spdylay.tar.xz
-    if [ 0 -ne $? ]; then
-	exit 1
-    fi
-    ls -l spdylay.tar.xz
-    tar xJf spdylay.tar.xz
-    if [ 0 -ne $? ]; then
-	exit 1
-    fi
-    mv spdylay-${SPDYLAY_VERSION} spdylay
-  else
-    git clone https://github.com/tatsuhiro-t/spdylay.git
-  fi
-fi
-
 # download nghttp2
 cd /build
 
@@ -48,20 +28,6 @@ fi
 # aptitude install
 apt-get $minimal_apt_get_args install $NGHTTP2_BUILD_PACKAGES
 
-# compile and install spdylay
-if test "$SPDYLAY_VERSION" != "DISABLED"; then 
-    cd /build/spdylay
-    
-    autoreconf -i
-    automake
-    autoconf
-    ./configure --disable-dependency-tracking\
-		--disable-examples --disable-src --disable-static\
-		--prefix=/usr
-    
-    make install
-fi
-
 # compile and install nghttp2
 cd /build/nghttp2
 
@@ -69,7 +35,7 @@ autoreconf -i
 automake
 autoconf
 
-./configure --enable-app --with-neverbleed --with-spdylay\
+./configure --enable-app --with-neverbleed\
             --disable-dependency-tracking\
             --disable-examples\
 	    --disable-static --disable-debug\
