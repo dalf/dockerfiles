@@ -2,7 +2,7 @@ FROM debian:stable-slim
 
 MAINTAINER Alexandre Flament <alex@al-f.net>
 
-ENV NGHTTP2_VERSION 1.32.1
+ENV NGHTTP2_VERSION 1.33.0
 
 COPY *.sh /build/ 
 
