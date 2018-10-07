@@ -1,9 +1,8 @@
-FROM alpine:3.5
+FROM alpine:3.8
 
 MAINTAINER Alexandre Flament <alex@al-f.net>
 
-ENV NGHTTP2_VERSION 1.24.0
-ENV SPDYLAY_VERSION 1.4.0
+ENV NGHTTP2_VERSION 1.34.0
 
 ENV NGHTTP2_RUNTIME_PACKAGES "libgcc libstdc++ libev libxml2 jansson zlib ca-certificates c-ares"
 ENV NGHTTP2_BUILD_PACKAGES "git curl xz gcc g++ autoconf automake make libtool file binutils libev-dev libxml2-dev jansson-dev zlib-dev cmake go c-ares-dev"
