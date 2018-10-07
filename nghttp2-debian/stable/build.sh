@@ -38,10 +38,10 @@ autoconf
 ./configure --enable-app --with-neverbleed\
             --disable-dependency-tracking\
             --disable-examples\
-	    --disable-static --disable-debug\
+            --disable-debug\
 	    --prefix=/usr
 
-make install-strip
+make install-strip -j${MAKE_J}
 
 # Keep only initial packages
 dpkg -l | grep "^ii"| awk ' {print $2} ' > /build/installed_after.txt
