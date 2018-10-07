@@ -19,39 +19,6 @@ cd libressl-${LIBRESSL_VERSION}
 make -j $(getconf _NPROCESSORS_ONLN)
 make install-strip
 
-# spdylay
-if test "$SPDYLAY_VERSION" != "DISABLED"; then
-
-  cd /build
-  
-  if test -n "$SPDYLAY_VERSION"; then
-    curl -fSL https://github.com/tatsuhiro-t/spdylay/releases/download/v${SPDYLAY_VERSION}/spdylay-${SPDYLAY_VERSION}.tar.xz -o spdylay.tar.xz
-    if [ 0 -ne $? ]; then
-	exit 1
-    fi
-    ls -l spdylay.tar.xz
-    tar xJf spdylay.tar.xz
-    if [ 0 -ne $? ]; then
-	exit 1
-    fi
-    mv spdylay-${SPDYLAY_VERSION} spdylay
-  else
-    git clone https://github.com/tatsuhiro-t/spdylay.git
-  fi
-
-  cd /build/spdylay
-
-  autoreconf -i
-  automake
-  autoconf
-  ./configure --disable-dependency-tracking\
-              --disable-examples --disable-src --disable-static\
-              --prefix=/usr
-
-  make -j $(getconf _NPROCESSORS_ONLN)
-  make install
-fi
-
 # Download nghttp2
 if test -n "$NGHTTP2_VERSION"; then
 
@@ -78,9 +45,10 @@ autoreconf -i
 automake
 autoconf
 
-./configure --enable-app --with-spdylay\
+./configure --enable-app\
             --disable-dependency-tracking\
-            --disable-examples --disable-static\
+            --disable-examples  --disable-hpack-tools --disable-python-bindings\
+	    --enable-static --disable-shared\
 	    --prefix=/usr
 
 make -j $(getconf _NPROCESSORS_ONLN)
