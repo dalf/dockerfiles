@@ -7,5 +7,7 @@ This is an *unofficial* Docker image of [nghttp2](https://github.com/nghttp2/ngh
 
 * based on debian:stable-slim
 * Python is included for OCSP.
-* OpenSSL 1.1.0 which support ALPN.
+* OpenSSL 1.1.1d which support ALPN.
 * nghttp2 is compiled with neverbleed option.
+
+See the [nghttp2](https://packages.debian.org/buster/nghttp2) package Debian

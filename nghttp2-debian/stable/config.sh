@@ -19,12 +19,15 @@ NGHTTP2_DOWNLOAD_PACKAGES="git ca-certificates curl xz-utils"
 #   libcunit1-dev - for tests
 #   libjansson-dev - for HPACK tools
 #   libjemalloc-dev - optional but recommended
-#   cython python-dev - python bindings
-NGHTTP2_BUILD_PACKAGES="$NGHTTP2_DOWNLOAD_PACKAGES g++ make binutils autoconf automake autotools-dev libtool pkg-config zlib1g-dev libssl-dev libxml2-dev libev-dev libevent-dev libjemalloc-dev libjansson-dev libc-ares-dev python-dev cython"
+#   cython3 python-dev - python bindings
+NGHTTP2_BUILD_PACKAGES="$NGHTTP2_DOWNLOAD_PACKAGES g++ make binutils autoconf automake autotools-dev libtool pkg-config zlib1g-dev libssl-dev libxml2-dev libev-dev libevent-dev libjemalloc-dev libjansson-dev libc-ares-dev python3-dev cython3 libsystemd-dev"
+
+
+" libcunit1-dev <!nocheck>, , pkg-config"
 
 ## Run time dependencies ##
 # openssl binary is needed for OCSP /usr/share/nghttp2/fetch-ocsp-response
-NGHTTP2_RUN_PACKAGES="libev4 libevent-2.0-5 libevent-openssl-2.0-5 libjemalloc1 libxml2 libjansson4 zlib1g openssl xml-core ca-certificates python libc-ares2"
+NGHTTP2_RUN_PACKAGES="libev4 libevent-openssl-2.1-6 libjemalloc2 libxml2 libjansson4 zlib1g openssl xml-core ca-certificates python3 libc-ares2"
 
 #
 if [[ -z ${MAKE_J} ]]; then
